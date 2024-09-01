@@ -45,9 +45,6 @@
 				</tr>
 			</table>
 
-
-            <h5><i>Site is under construction. Will be ready soon </i></h5>
-
 			<!-- <table align=center width=380px>
 				<tr>
 					<td align=center width=120px>
@@ -68,6 +65,181 @@
 				</tr>
 			</table> -->
 		</table>
+	</center>
+
+	<hr>
+
+	<table align=center width=650px>
+		<center><h1>Abstract</h1></center>
+		<tr>
+			Crack segmentation plays a crucial role in ensuring the structural integrity and seismic safety of civil structures. 
+			However, existing crack segmentation algorithms often encounter challenges in maintaining accuracy when faced with domain shift across datasets. 
+			To address this issue, we propose a novel deep network that employs incremental training with unsupervised domain adaptation (UDA) using adversarial learning, 
+			while preserving accuracy on the source domain. Our approach leverages an encoder-decoder architecture, consisting of both domain-invariant and domain-specific parameters. 
+			The encoder learns shared crack features across all domains, ensuring robustness to domain variations. Simultaneously, the decoder's domain-specific parameters capture 
+			domain-specific features unique to each domain. By combining these components, our model achieves improved crack segmentation performance. 
+			Furthermore, we introduce BuildCrack, a new crack dataset comparable to sub-datasets of the well-established CrackSeg9K dataset in terms of image count and crack percentage. 
+			We evaluate our proposed approach against state-of-the-art UDA methods using different sub-datasets of CrackSeg9K and our custom dataset. 
+			Our experimental results demonstrate a significant improvement in crack segmentation accuracy and generalization across target domains compared to other UDA methods - specifically, an improvement of 0.65 and 2.7 mIoU on source and target domains respectively.
+		</tr>
+	</table>
+	<br>
+	<table align=center width=850px>
+		<tr>
+			<td width=260px>
+				<center>
+					<img class="round" style="width:800px" src="assets/images/overview.jpg"/>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td> <center>
+				BuildCrack dataset was captured by imaging building facades using a drone-mounted camera from different angles and distances. BuildCrack has images with low
+contrast, occlusions, and shadows, which challenge the model’s robustness. 
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Overview </h1></center>
+		<tr>
+			<td> <p>In order to do crack segmentation based on pictures of a buildings taken by a drone:</p>
+				<ul>
+					<li> We propose CrackUDA, a novel incremental UDA approach that ensures robust adaptation and effective
+						crack segmentation. 
+					<li> We demonstrate the effectiveness of CrackUDA by
+						achieving higher accuracy in the challenging task of
+						building crack segmentation, surpassing the state-of-
+						the-art UDA methods. Specifically, CrackUDA yields
+						an improvement of 0.65 and 2.7 mIoU on the source
+						and target domains, respectively.
+					<li> We introduce BuildCrack, a new building crack dataset collected via a drone.
+
+				</ul>
+			
+			</td>
+		</tr>
+	</table>
+
+	<br>
+
+	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Approach </h1></center>
+
+	<table align=center width=850px>
+		<tr>
+			<td width=260px>
+				<center>
+					<img class="round" style="width:800px" src="assets/images/model.jpg"/>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td> <center>
+				Overview of our proposed architecture. In step 1 we train our network, M<sub>1</sub>, using the labeled source dataset <i>S</i> for binary segmentation. 
+				In step 2, decoder D<sub>1</sub> and &phi;<sub>s<sub>1</sub></sub></sub> are frozen, and a new set of domain-specific parameters &phi;<sub>s<sub>2</sub></sub></sub> are added and we call this model M<sub>2</sub>. 
+				An alternating training strategy is followed in which we first train for binary segmentation on the source domain followed by adversarial training on both source and target domains.
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr>
+	<table align=center width=850px>
+		<center><h3>Results</h3></center>
+
+	<table align=center width=850px>
+		<tr>
+			<td width=260px>
+				<center>
+					<img class="round" style="width:800px" src="assets/images/teaser.png"/>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td> <center>
+				Examples of cracks in building structures and the predicted crack location by CrackUDA (our approach). 
+				espite the small footprint of cracks, diversity of appearance and presence of distractors, our incremental unsupervised approach localizes cracks in a precise manner.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<table align=center width=850px>
+		<tr>
+			<td width=260px>
+				<center>
+					<img class="round" style="width:600px" src="assets/images/uda.jpg"/>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td> <center>
+				Comparison of mIoU scores on the validation set of CrackSeg9K and BuildCrack (target dataset) with state-of-the-art UDA methods. * approaches did not converge for our setting. 
+				Our approach achieves the best generalization performance.
+			</td>
+		</tr>
+	</table>
+	<br>
+	<table align=center width=850px>
+		<tr>
+			<td width=260px>
+				<center>
+					<img class="round" style="width:800px" src="assets/images/result_comparision.png"/>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td> <center>
+				Qualitative results for CrackSeg9K validation set for CrackUDA and FADA.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+<hr>
+
+<table align=center width=850px>
+	<center><h1>Previous Work</h1></center>
+	<tr>
+		<td> <p>Our previous work includes estimating following building parameters:</p>
+			<ul>
+				<li> ROI detections (like window/storeys) and their count
+				<li> Frontal and top-view layout estimation
+				<li> Scale estimation 
+				<li> ROIs from a global scene context etc.
+			</ul>
+			<center>More details about above features can be found <a href="https://github.com/Dhruv2012/Drone-based-building-assessment" target="_blank" rel="noopener"><u>here</u>.</a>
+			</center>
+			<ul>
+				<li> Distance between Adjacent Buildings
+				<li>Plan Shape and Roof Area Estimation
+				<li>Roof Layout Estimation 
+			</ul>
+			<center>More details about above features can be found <a href="https://github.com/UVRSABI/UVRSABI-Code" target="_blank" rel="noopener"><u>here</u>.</a>
+			</center>
+		</td>
+	</tr>
+</table>
+
+
+	<hr>
+
+<center> <h1> Contact </h1>
+	<p>If you have any question, please reach out to any of the above mentioned authors.</p>
 	</center>
 </body>
 </html>
